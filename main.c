@@ -29,7 +29,6 @@ void print_reverse_string(char *text, bool arrows) {
         printf("%c\n", text[i]);
       }
     }
-
   } else {
     for (int i = len_of_text; i >= 0; i--) {
       printf("%c", text[i]);
@@ -45,35 +44,18 @@ const char *get_user_input(void) {
   return user_input;
 }
 
-int main(void) {
-  print_with_arrows(NAME);
-  print_reverse_string(NAME, 1);
-  const char *res = get_user_input();
-  printf("%s\n", res);
-
-  float farray[3];
-  memset(farray, 1, sizeof(farray));
-  printf("%f\n", farray[0]);
-  printf("%f\n", farray[1]);
-  printf("%f\n", farray[2]);
-
-  puts("Something Else Here");
-  puts("Some new line here");
-
-  char new_name[20];
-  puts("Insert name here:");
-  scanf("%5s", new_name);
-  puts("This is the new name:");
-  puts(new_name);
-
+void reverse(char t[]) {
+  int len_of_text = strlen(t);
+  int i, j;
+  char new[len_of_text];
+  for (j = 0, i = len_of_text; i >= 0; i--, j++) {
+    new[j] = t[i];
+    printf("%c", new[j]);
+  }
+  printf("\n");
+  return;
 }
 
-
-
-
-
-
-
-
-
-
+int main(void) {
+  reverse("FLORA");
+}
