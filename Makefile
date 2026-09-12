@@ -14,3 +14,6 @@ run:
 	@clear && ./main
 
 buildrun: build run
+
+git:
+	git add -A && git commit -m "update"
