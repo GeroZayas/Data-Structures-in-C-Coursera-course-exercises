@@ -3,15 +3,22 @@
 #include <stdio.h>
 #include <string.h>
 
+void py_rstrip(char inp[]) {
+  int count = 0;
+  int original_length = strlen(inp);
+  for (int i = original_length - 1; i >= 0; i--) {
+    if (inp[i] == ' ') {
+      count += 1;
+      printf("count = %d\n", count);
+    } else {
+      break;
+    }
+    printf("%c\n", inp[i]);
+  }
+}
+
 int main(void) {
-  char in_one[50];
-  char in_two[50];
-  char final_str[100];
-  puts("Enter two strings");
-  scanf("%s", in_one);
-  scanf("%s", in_two);
-  strcpy(final_str, in_one);
-  strcat(final_str, " & ");
-  strcat(final_str, in_two);
-  // puts(final_str);
+  char s1[] = "   Hello   World    ";
+  py_rstrip(s1);
+  printf("-%s-\n", s1);
 }
