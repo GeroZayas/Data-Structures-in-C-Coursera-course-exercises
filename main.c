@@ -3,21 +3,29 @@
 #include <stdio.h>
 #include <string.h>
 
-void py_rstrip(char inp[]) {
-  int count = 0;
+void py_lstrip(char inp[]) {
   int original_length = strlen(inp);
-  for (int i = original_length - 1; i >= 0; i--) {
+  int i;
+  int count = 0;
+  for (i = 0; i < original_length; i++) {
     if (inp[i] == ' ') {
-      count += 1;
+      count++;
+      continue;
     } else {
       break;
     }
   }
-  inp[(original_length-count)] = '\0';
+  int diff = original_length - count;
+  char temp[diff];
+  for (i = 0; i < diff; i++){
+    temp[i] = inp[i + count];
+  }
+  temp[diff] = '\0';
+  strcpy(inp, temp);  
 }
 
 int main(void) {
   char s1[] = "   Hello   World    ";
-  py_rstrip(s1);
+  py_lstrip(s1);
   printf("-%s-\n", s1);
 }
