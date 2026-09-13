@@ -9,12 +9,11 @@ void py_rstrip(char inp[]) {
   for (int i = original_length - 1; i >= 0; i--) {
     if (inp[i] == ' ') {
       count += 1;
-      printf("count = %d\n", count);
     } else {
       break;
     }
-    printf("%c\n", inp[i]);
   }
+  inp[(original_length-count)] = '\0';
 }
 
 int main(void) {
