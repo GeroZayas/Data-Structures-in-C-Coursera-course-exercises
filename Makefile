@@ -4,10 +4,10 @@
 # alias c="clear"
 
 build:
-	gcc main.c -o main -std=c99 -Wall -pedantic
+	gcc main.c libs/Forge/*.c -o main -Ilibs/Forge -std=c99 -Wall -pedantic -fms-extensions
 
 build-debug:
-	gcc main.c -o main -g -std=c99 -Wall -pedantic
+	gcc main.c libs/Forge/*.c -o main -g -Ilibs/Forge -std=c99 -Wall -pedantic -fms-extensions
 
 build-curl-ex:
 	gcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
