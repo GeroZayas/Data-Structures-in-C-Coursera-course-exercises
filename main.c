@@ -4,35 +4,35 @@
 #include <string.h>
 
 /*
- The program will create a 10 element array and read in 10 integers into the array.
- Then the program will print the integers backwards.
- Then the program will scan for entries in the array which contain the value 100 and print out the
- index of the entries with the number 100. T he program will also count the number of entries which
- equal 100. The program should work even if there are no entries which equal 100. See the sample
- output for the expect format of the output.
+ You are to perform the following steps in a function named process():
+ (1) Print out the string you are passed.
+ (2) Count the number of characters in the string.
+ (3) If there are more than 10 characters in the string print out the 10th character (line[9])
+ (4) Go through the string and replace every blank with a dash '-'
+ (5) Print out the new string with dashes.
  */
 
-int main(void) {
-  int i, v, arr[10];
-  int hundred_counter = 0;
-  for (i = 0; i < 10; i++) {
-    scanf("%d", &v);
-    arr[i] = v;
-    if (v == 100) {
-      hundred_counter++;
+void process(char line[]) {
+  printf("\nString: %s\n", line);
+  int count = 0;
+  int i;
+  for (i = 0; i < strlen(line); i++) {
+    count++;
+    if (line[i] == ' ') {
+      line[i] = '-';
     }
   }
+  printf("Count=%d\n", count);
+  if (count > 10) {
+    printf("The ninth character is: %c\n", line[9]);
+  }
+  printf("String: %s\n", line);
+}
 
-  for (i = 10 - 1; i >= 0; i--) {
-    printf("numb[%d] = %d\n", i, arr[i]);
-  }
-  puts("");
-  puts("Searching for entries equal to 100\n");
-  for (i = 0; i < 10; i++) {
-    if (arr[i] == 100) {
-      printf("Found 100 at %d\n", i);
-    }
-  }
-  puts("");
-  printf("Found %d entries with 100\n", hundred_counter);
+int main(void) {
+  char line[1000];
+  strcpy(line, "Hi there and welcome to LBS290");
+  process(line);
+  strcpy(line, "I love C");
+  process(line);
 }
