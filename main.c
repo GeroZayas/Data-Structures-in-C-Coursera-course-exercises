@@ -22,6 +22,9 @@ int main(void) {
 
   while (scanf("%s", token) == 1) {
     // printf("%s\n", token);
+    value = token-"0";
+    printf("%d\n", value);
+
   }
   printf("Memory:\n%s\n", memory);
 }
