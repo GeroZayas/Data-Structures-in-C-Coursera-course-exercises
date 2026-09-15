@@ -4,35 +4,24 @@
 #include <string.h>
 
 /*
- You are to perform the following steps in a function named process():
- (1) Print out the string you are passed.
- (2) Count the number of characters in the string.
- (3) If there are more than 10 characters in the string print out the 10th character (line[9])
- (4) Go through the string and replace every blank with a dash '-'
- (5) Print out the new string with dashes.
+This is a subset of an important concept in Computer Science called a Turing Machine.
+We call it a "Touring Machine" because it "wanders around and does things in memory" similar to a
+Turing Machine. Your computer has 256 characters of memory. The machine keeps track of the
+"position" or the "head" where data is to be written. The starting position is zero. You are to read
+a sequence of instructions from input and perform those instructions. When there are no more
+instructions, print the memory out as a zero-terminated C character array All of the numbers should
+be in the range of 0-255 so they fit into a C char variable.
+42     Store this value into the memory at the current position
+>      Move the "position" one to the right (i.e. position++);
+<      Move the "position" one to the left (i.e. position--);
  */
 
-void process(char line[]) {
-  printf("\nString: %s\n", line);
-  int count = 0;
-  int i;
-  for (i = 0; i < strlen(line); i++) {
-    count++;
-    if (line[i] == ' ') {
-      line[i] = '-';
-    }
-  }
-  printf("Count=%d\n", count);
-  if (count > 10) {
-    printf("The ninth character is: %c\n", line[9]);
-  }
-  printf("String: %s\n", line);
-}
-
 int main(void) {
-  char line[1000];
-  strcpy(line, "Hi there and welcome to LBS290");
-  process(line);
-  strcpy(line, "I love C");
-  process(line);
+  char memory[256], token[256];
+  int position = 0, value;
+
+  while (scanf("%s", token) == 1) {
+    // printf("%s\n", token);
+  }
+  printf("Memory:\n%s\n", memory);
 }
