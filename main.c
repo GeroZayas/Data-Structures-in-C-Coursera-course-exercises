@@ -17,12 +17,12 @@ be in the range of 0-255 so they fit into a C char variable.
  */
 
 void get_and_put_char(void) {
-  int c;
-  c = getchar();
-  while (c != EOF) {
-    putchar(c);
+    int c;
     c = getchar();
-  }
+    while (c != EOF) {
+        putchar(c);
+        c = getchar();
+    }
 }
 
 /*
@@ -37,29 +37,41 @@ right at that position, it grows by one.
 */
 
 int main(void) {
-  int c, i, nwhite, nother;
-  int ndigit[10];
+    int c, i, nwhite, nother;
+    int ndigit[10];
 
-  nwhite = nother = 0;
-  /* initializing to 0 all positions in the array */
-  for (i = 0; i < 10; ++i) {
-    ndigit[i] = 0;
-  }
-
-  while ((c = getchar()) != EOF) {
-    if (c >= '0' && c <= '9') {
-      ++ndigit[c - '0'];
-    } else if (c == ' ' || c == '\n' || c == '\t') {
-      ++nwhite;
-    } else {
-      ++nother;
+    nwhite = nother = 0;
+    /* initializing to 0 all positions in the array */
+    for (i = 0; i < 10; i++) {
+        ndigit[i] = 0;
     }
-  }
 
-  printf("digits = ");
-  for (i = 0; i < 10; ++i) {
-    printf(" %d ", ndigit[i]);
-  }
-  printf("\nnwhite space = %d, other = %d\n", nwhite, nother);
-  return 0;
+    while ((c = getchar()) != EOF) {
+        if (c >= '0' && c <= '9') {
+            ++ndigit[c - '0'];
+        } else if (c == ' ' || c == '\n' || c == '\t') {
+            ++nwhite;
+        } else {
+            ++nother;
+        }
+    }
+
+    printf("digits = ");
+    for (i = 0; i < 10; ++i) {
+        printf(" %d ", ndigit[i]);
+    }
+    printf("\nnwhite space = %d, other = %d\n", nwhite, nother);
+    return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+

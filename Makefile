@@ -1,5 +1,6 @@
 # Copy this to the terminal for easy aliases:
 # alias r="make run" alias b="make build" alias c="clear"
+# c && b && r
 
 build:
 	tcc main.c -o main -std=c89 -Wall -pedantic
