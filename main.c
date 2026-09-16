@@ -19,12 +19,9 @@ be in the range of 0-255 so they fit into a C char variable.
 int main(void) {
   char memory[256], token[256];
   int position = 0, value;
-
   while (scanf("%s", token) == 1) {
-    // printf("%s\n", token);
-    value = token-"0";
-    printf("%d\n", value);
-
+    printf("INSERTED TOKEN = %s\n", token);
   }
+  memory[position] = '2';
   printf("Memory:\n%s\n", memory);
 }
