@@ -17,11 +17,10 @@ be in the range of 0-255 so they fit into a C char variable.
  */
 
 int main(void) {
-  char memory[256], token[256];
-  int position = 0, value;
-  while (scanf("%s", token) == 1) {
-    printf("INSERTED TOKEN = %s\n", token);
+  int c; 
+  c = getchar();
+  while(c != EOF){
+    putchar(c);
+    c = getchar();
   }
-  memory[position] = '2';
-  printf("Memory:\n%s\n", memory);
 }
