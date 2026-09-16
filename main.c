@@ -16,11 +16,14 @@ be in the range of 0-255 so they fit into a C char variable.
 <      Move the "position" one to the left (i.e. position--);
  */
 
-int main(void) {
-  int c; 
+void get_and_put_char(void) {
+  int c;
   c = getchar();
-  while(c != EOF){
+  while (c != EOF) {
     putchar(c);
     c = getchar();
   }
+}
+
+int main(void) {
 }
