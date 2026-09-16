@@ -1,5 +1,5 @@
 #include "stuff.h"
-#include <stdbool.h>
+/*#include <stdbool.h>*/
 #include <stdio.h>
 #include <string.h>
 
@@ -25,5 +25,41 @@ void get_and_put_char(void) {
   }
 }
 
+/*
+We do all the proper initialization.
+We open the while loop. We start getting whatever characters the user inputs.
+We check if the char is EOF.
+If it's not, then we check if it is a digit between 0 and 9.
+When you do digit char - '0' you get the digit in int mode.
+Then we use that int digit as the index for the ndigit array.
+Everything there was initialized to 0, so when we increment it ++ndigit,
+right at that position, it grows by one.
+*/
+
 int main(void) {
+  int c, i, nwhite, nother;
+  int ndigit[10];
+
+  nwhite = nother = 0;
+  /* initializing to 0 all positions in the array */
+  for (i = 0; i < 10; ++i) {
+    ndigit[i] = 0;
+  }
+
+  while ((c = getchar()) != EOF) {
+    if (c >= '0' && c <= '9') {
+      ++ndigit[c - '0'];
+    } else if (c == ' ' || c == '\n' || c == '\t') {
+      ++nwhite;
+    } else {
+      ++nother;
+    }
+  }
+
+  printf("digits = ");
+  for (i = 0; i < 10; ++i) {
+    printf(" %d ", ndigit[i]);
+  }
+  printf("\nnwhite space = %d, other = %d\n", nwhite, nother);
+  return 0;
 }

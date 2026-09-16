@@ -2,13 +2,13 @@
 # alias r="make run" alias b="make build" alias c="clear"
 
 build:
-	gcc main.c -o main -std=c99 -Wall -pedantic
+	tcc main.c -o main -std=c89 -Wall -pedantic
 
 debug:
-	gcc main.c -o main -g -std=c99 -Wall -pedantic
+	tcc main.c -o main -g -std=c89 -Wall -pedantic
 
 build-curl-ex:
-	gcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
+	tcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
 
 run:
 	@clear && ./main
