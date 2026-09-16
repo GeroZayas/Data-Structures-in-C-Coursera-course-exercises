@@ -15,12 +15,18 @@ be in the range of 0-255 so they fit into a C char variable.
 <      Move the "position" one to the left (i.e. position--);
  */
 
-/*
 
-p
-0 1 2 3 4 5 6 7 8 9 
-[][][][][][][][][][]
+/* Note 1A:
+-----------
+The struggle here (due to lack of C knowledge) was this making the token an int that we could
+place in `memory` so as to represent a character, and print the wanted string in the end.
+IMPORTANT: check if it is a digit => `if (token[i] - '0' >= 0 && token[i] - '0' <= 9){ ...`
+To convert to digit => token[i] - '0' -> char - '0'
+Then, as we get bigger numbers, we multiply the previous `value` by 10 and then we add the new `value`
+ex A: value is 4 -> then new token is 2, value is (4 * 10) + 2 = 42
+ex B: value is 6 -> then new token is 3, value is (6 * 10) + 3 = 63 -> then new token is 7, value is (63 * 10) + 7 = 630 + 7 = 637
 */
+
 
 int main(void) {
   char  memory        [256];
@@ -34,6 +40,7 @@ int main(void) {
     /* printf("POSITION = %d\n", position); */
     /* printf("LEN of token %lu\n", strlen(token)); */
 
+    /* See Note 1A */
     for (i=0;i<strlen(token);i++){
       if (token[i] - '0' >= 0 && token[i] - '0' <= 9){
         value = (value * 10) + token[i] - '0';
