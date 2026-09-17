@@ -25,7 +25,6 @@ int main(void) {
     size_t    len_array;
     short int i;
 
-    print_person(&gero);
     people[0] = gero;
     people[1] = mar;
     people[2] = elisa;
