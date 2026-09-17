@@ -1,46 +1,26 @@
 #include "stuff.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-/*
-Structures - Linked List
-*/
-
-typedef struct {
-    char name[30];
-    int  age;
-    char adress[50];
-} Person;
-
-void print_person(Person *person) {
-    printf("PERSON => name=%s age=%d address=%s\n", person->name, person->age, person->adress);
-}
+#define BUFFER_SIZE 256
 
 int main(void) {
-    Person    gero  = {"Gero", 35, "Barcelona City"};
-    Person    mar   = {"Mar", 35, "L'Example"};
-    Person    elisa = {"Elisa", 60, "Holguin"};
-    Person    people[3];
-    size_t    len_array;
-    short int i;
+    FILE *file;
+    char  buffer[BUFFER_SIZE];
 
-    people[0] = gero;
-    people[1] = mar;
-    people[2] = elisa;
-
-    len_array = sizeof(people) / sizeof(people[0]);
-    for (i = 0; i < len_array; i++) {
-        print_person(&people[i]);
+    file = fopen("./assets/Lorem ipsum.txt", "r");
+    if (file == NULL) {
+        perror("ERROR opening file");
+        return EXIT_FAILURE;
     }
 
-    return 0;
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+
+    fclose(file);
+
+    return EXIT_SUCCESS;
 }
-
-
-
-
-
-
-
-
