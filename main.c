@@ -16,25 +16,36 @@ typedef struct lnode {
 } lnode;
 
 int main(void) {
-    lnode *head = NULL;
-    lnode *tail = NULL;
+    lnode *head;
+    lnode *tail;
     lnode *current;
+    lnode *new;
     char   line[MAXLINE];
+    head = NULL;
+    tail = NULL;
 
     while (fgets(line, MAXLINE, stdin) != NULL) {
-        char *save = (char *)malloc(strlen(line) + 1); // void * -> char *
+        char *save = (char *)malloc(strlen(line) + 1); /* void * -> char * */
         strcpy(save, line);
 
-        lnode *new = (lnode *)malloc(sizeof(lnode)); // void * -> lnode *
-        new->text  = save;
-        new->next  = NULL;
-        new->prev  = tail;
+        new       = (lnode *)malloc(sizeof(lnode)); /* void * -> lnode * */
+        new->text = save;
+        new->next = NULL;
+        new->prev = tail;
+
+        if (head == NULL) {
+            head = new;
+        }
 
         if (tail != NULL) {
             tail->next = new;
         }
 
         tail = new;
+    }
+
+    for (current = tail; current != NULL; current = current->prev) {
+        printf("%s", current->text);
     }
 
     return 0;
