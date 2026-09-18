@@ -8,6 +8,7 @@
 Example and code by gingerBill here (https://www.gingerbill.org/article/2019/02/08/memory-allocation-strategies-002/)
 */
 
+
 char  *arena_buffer;
 size_t arena_buffer_length;
 size_t arena_offset;
