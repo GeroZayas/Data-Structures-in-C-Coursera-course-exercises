@@ -8,9 +8,10 @@
 Structures - Linked List
 */
 #define MAXLINE 1000
+#define String char *
 
 typedef struct lnode {
-    char         *text;
+    String        text;
     struct lnode *prev;
     struct lnode *next;
 } lnode;
