@@ -1,13 +1,12 @@
 # Copy this to the terminal for easy aliases:
-# alias r="make run"
-# alias b="make build"
-# alias c="clear"
+# alias r="make run" alias b="make build" alias c="clear"
+# c && b && r
 
 build:
-	gcc main.c libs/Forge/*.c -o main -Ilibs/Forge -Ilibs/Relinquish -std=c99 -Wall -fms-extensions
+	gcc main.c -o main -std=c99 -Wall -Werror -pedantic
 
-build-debug:
-	gcc main.c libs/Forge/*.c -o main -g -Ilibs/Forge -Ilibs/Relinquish -std=c99 -Wall -fms-extensions
+debug:
+	gcc main.c -o main -g -std=c99 -Wall -Werror -pedantic
 
 build-curl-ex:
 	gcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
