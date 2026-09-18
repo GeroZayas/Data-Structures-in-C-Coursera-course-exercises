@@ -3,13 +3,13 @@
 # c && b && r
 
 build:
-	tcc main.c -o main -std=c89 -Wall -pedantic
+	gcc main.c -o main -std=c99 -Wall -Werror -pedantic
 
 debug:
-	tcc main.c -o main -g -std=c89 -Wall -pedantic
+	gcc main.c -o main -g -std=c99 -Wall -Werror -pedantic
 
 build-curl-ex:
-	tcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
+	gcc curl_ex.c $$(curl-config --cflags --libs) -o curl_ex
 
 run:
 	@clear && ./main
