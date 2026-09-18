@@ -5,67 +5,26 @@
 #include <string.h>
 
 /*
-Structures - Linked List
+Example and code by gingerBill here (https://www.gingerbill.org/article/2019/02/08/memory-allocation-strategies-002/)
 */
-#define MAXLINE 1000
-#define String char *
 
-typedef struct lnode {
-    String        text;
-    struct lnode *prev;
-    struct lnode *next;
-} lnode;
+char  *arena_buffer;
+size_t arena_buffer_length;
+size_t arena_offset;
 
-int main(void) {
-    lnode *head;
-    lnode *tail;
-    lnode *current;
-    lnode *new;
-    char   line[MAXLINE];
-    head = NULL;
-    tail = NULL;
-
-    while (fgets(line, MAXLINE, stdin) != NULL) {
-        char *save = (char *)malloc(strlen(line) + 1); /* void * -> char * */
-        strcpy(save, line);
-
-        new       = (lnode *)malloc(sizeof(lnode)); /* void * -> lnode * */
-        new->text = save;
-        new->next = NULL;
-        new->prev = tail;
-
-        if (head == NULL) {
-            head = new;
-        }
-
-        if (tail != NULL) {
-            tail->next = new;
-        }
-
-        tail = new;
+void *arena_alloc(size_t size) {
+    /* Check to see if the backing memory has space left*/
+    if (arena_offset + size <= arena_buffer_length) {
+        void *ptr = &arena_buffer[arena_offset];
+        arena_offset += size;
+        /* Zero new memory by default*/
+        memset(ptr, 0, size);
+        return ptr;
     }
-
-    for (current = tail; current != NULL; current = current->prev) {
-        printf("%s", current->text);
-    }
-
-    return 0;
+    /* Return NULL if the areba is out of memory */
+    return NULL;
 }
 
-/*
- |
-`'´
-tail NULL
-new.next = NULL
-new.prev = NULL
-
-tail = new
-----
-new2.next = NULL
-new2.prev = new
-
-new.next = new2
-
-tail = new2
-----
-*/
+int main(void) {
+    return 0;
+}
