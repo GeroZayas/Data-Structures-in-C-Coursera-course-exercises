@@ -1,4 +1,5 @@
 #include "stuff.h"
+#include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -59,7 +60,13 @@ int main(void) {
         printf("PEOPLE %d with NAME %s and AGE %d\n", i, people[i].name, people[i].age);
     }
 
+    assert(people[0].age == 34);
+
     free(people);
-    
+
     return 0;
 }
+
+
+
+
