@@ -24,7 +24,6 @@ Arena arena_new(void) {
 
 typedef struct {
     char    name[20];
-    char    address[50];
     uint8_t age;
 } Human;
 
@@ -42,26 +41,25 @@ typedef struct {
 // }
 void *arena_free(Arena *arena);
 
-void *print_human_properties(Human *human) {
-    printf("NAME        = %s\n", human->name);
-    printf("ADDRESS     = %s\n", human->address);
-    printf("AGE         = %d\n", human->age);
+int mainArena(void) {
+    // Arena my_arena = arena_new();
+    // printf("BUFFER %s\n", my_arena.buffer);
+
     return 0;
 }
 
 int main(void) {
-    // Arena my_arena = arena_new();
-    // printf("BUFFER %s\n", my_arena.buffer);
-    Human maca = {"Mar", "Barcelona City", 35};
+    uint8_t amount_people = 3;
+    Human  *people        = calloc(amount_people, sizeof(Human));
+    people[0].age         = 34;
+    people[1].age         = 25;
+    people[2].age         = 40;
 
-    print_human_properties(&maca);
+    for (int i = 0; i < amount_people; i++) {
+        printf("PEOPLE %d with NAME %s and AGE %d\n", i, people[i].name, people[i].age);
+    }
 
-    Human *gero = calloc(1, sizeof(Human));
-    strcpy(gero->name, "Gero");
-    strcpy(gero->address, "BCN TOO");
-    gero->age = 34;
-
-    print_human_properties(gero);
-
+    free(people);
+    
     return 0;
 }
