@@ -60,6 +60,8 @@ int main(void) {
         printf("PEOPLE %d with NAME %s and AGE %d\n", i, people[i].name, people[i].age);
     }
 
+    Human elisa; 
+
     assert(people[0].age == 34);
 
     free(people);
