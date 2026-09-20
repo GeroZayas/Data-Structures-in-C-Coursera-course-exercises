@@ -6,7 +6,6 @@
 #include <string.h>
 
 /*
-Structures - Linked List
 
 You will write two function dealing with a simple strcuture as shown below. The first function will dump the internal
 values of the simpledate structure. The second will compute the day of the year similar to the sample code in Chapter 6
