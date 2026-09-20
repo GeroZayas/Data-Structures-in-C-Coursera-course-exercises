@@ -16,7 +16,7 @@ run:
 
 buildrun: build run
 
-m ?="update"
+m ?=update
 git:
 	git add -A && git commit -m "$(m)"
 	
