@@ -49,7 +49,18 @@ int mainArena(void) {
     return 0;
 }
 
-int main(void) {
+int main(int argc, char **argv) {
+    printf("ARGUMENT 1 = %s\n", argv[1]);
+
+    char *arg = argv[1];
+    if (strcmp(arg, "clean") == 0) {
+        puts("You selected clean");
+    } else if (strcmp(arg, "dance") == 0) {
+        puts("You selected dance");
+    } else {
+        puts("Bro, i dont even know what is that");
+    }
+
     uint8_t amount_people = 3;
     Human  *people        = calloc(amount_people, sizeof(Human));
     people[0].age         = 34;
@@ -60,15 +71,9 @@ int main(void) {
         printf("PEOPLE %d with NAME %s and AGE %d\n", i, people[i].name, people[i].age);
     }
 
-    Human elisa; 
-
     assert(people[0].age == 34);
 
     free(people);
 
     return 0;
 }
-
-
-
-

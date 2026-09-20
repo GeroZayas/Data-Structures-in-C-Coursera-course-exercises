@@ -16,8 +16,9 @@ run:
 
 buildrun: build run
 
+message ?="update"
 git:
-	git add -A && git commit -m "update"
+	git add -A && git commit -m "$(message)"
 
 clean:
 	rm -rf main.DSYM main main2 curl_ex
