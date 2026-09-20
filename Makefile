@@ -16,8 +16,12 @@ run:
 
 buildrun: build run
 
+m ?="update"
 git:
-	git add -A && git commit -m "update"
+	git add -A && git commit -m "$(m)"
+	
+push:
+	git push
 
 clean:
 	rm -rf main.DSYM main main2 curl_ex
