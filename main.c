@@ -49,14 +49,30 @@ int mainArena(void) {
     return 0;
 }
 
+void *clean(void) {
+    puts("You selected clean");
+    puts("====================");
+    puts("Doing some cleaning");
+    puts("====================");
+    return 0;
+}
+
+void *dance(void) {
+    puts("You selected dance");
+    puts("====================");
+    puts("Doing some DANCING");
+    puts("====================");
+    return 0;
+}
+
 int main(int argc, char **argv) {
     printf("ARGUMENT 1 = %s\n", argv[1]);
 
     char *arg = argv[1];
     if (strcmp(arg, "clean") == 0) {
-        puts("You selected clean");
+        clean();
     } else if (strcmp(arg, "dance") == 0) {
-        puts("You selected dance");
+        dance();
     } else {
         puts("Bro, i dont even know what is that");
     }
