@@ -1,4 +1,6 @@
 #include "stuff.h"
+#include <_locale_posix2008.h>
+#include <_string.h>
 #include <_time.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -6,70 +8,85 @@
 #include <string.h>
 
 /*
-
-You will write two function dealing with a simple strcuture as shown below. The first function will dump the internal
-values of the simpledate structure. The second will compute the day of the year similar to the sample code in Chapter 6
-of the K&R book.
-
+You will write a function list_add() to append an integer to the end of a linked list.
+You will also write a function called list_find() that will return the list node containing the integer value or NULL if
+the value is not in the list.
 */
 
-static int day_tab[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-                             {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
+typedef struct lnode {
+    int           value;
+    struct lnode *next;
+} lnode;
 
-struct simpledate {
-    int day;
-    int month;
-    int year;
-};
+typedef struct list {
+    lnode *head;
+    lnode *tail;
+} list;
 
-int is_leap_year(int year) {
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
-        return 1;
-    }
-    return 0;
-}
+/*
+new_node {10, NULL}
+my_list->head = new_node
+my_list->tail = new_node
 
-/* set day of year from month, day */
-int day_of_year(struct simpledate *pd) {
-    int res = 0;
-    if (is_leap_year(pd->year)) {
-        for (int month = 1; month < pd->month; month++) {
-            res += day_tab[1][month];
-        }
-        res += pd->day;
-        return res;
+my_list->head->next = new_node;
+my_list->tail = new_node;
+*/
+
+void list_add(struct list *lst, int value) {
+    lnode  new_node = {.value = value, .next = NULL};
+    lnode *ptr_node = (lnode *)calloc(1, sizeof(lnode));
+    *ptr_node       = new_node;
+    if (lst->head == NULL) {
+        lst->head = ptr_node;
+        lst->tail = ptr_node;
     } else {
-        for (int month = 1; month < pd->month; month++) {
-            res += day_tab[0][month];
-        }
-        res += pd->day;
-        return res;
+        lst->head->next = ptr_node;
+        lst->tail       = ptr_node;
     }
 }
 
-/* print date from year, month, day */
-void dump_date(struct simpledate *pd) {
-    printf("%d/%02d/%02d\n", pd->year, pd->month, pd->day);
+struct lnode *list_find(struct list *lst, int value) {
+    for (lnode *node = lst->head; node->next != NULL; node = node->next) {
+        printf("VALUE %d\n", node->value);
+    }
+    return NULL;
 }
 
-int main(void) {
-    struct simpledate sd;
+void list_dump(struct list *lst) {
+    printf("\nDump:\n");
+    for (lnode *cur = lst->head; cur != NULL; cur = cur->next) {
+        printf("  %d\n", cur->value);
+    }
+}
 
-    sd.year  = 2023;
-    sd.month = 2;
-    sd.day   = 11;
-    dump_date(&sd);
-    printf("Day of year %d\n", day_of_year(&sd));
+int main(int argc, char **argv) {
+    struct list   mylist;
+    struct lnode *mynode;
 
-    sd.year  = 2023;
-    sd.month = 9;
-    sd.day   = 15;
-    dump_date(&sd);
-    printf("Day of year %d\n", day_of_year(&sd));
+    mylist.head = NULL;
+    mylist.tail = NULL;
 
-    sd.year  = 2024;
-    sd.month = 9;
-    sd.day   = 15;
-    dump_date(&sd);
-    printf("Day of year %d\n", day_of_year(&sd));
+    list_add(&mylist, 10);
+    list_add(&mylist, 20);
+    list_add(&mylist, 30);
+
+    list_dump(&mylist);
+
+    mynode = list_find(&mylist, 42);
+    if (mynode == NULL) {
+        printf("Did not find 42\n");
+    } else {
+        printf("Looked for 42, found %d\n", mynode->value);
+    }
+
+    mynode = list_find(&mylist, 30);
+    if (mynode == NULL || mynode->value != 30) {
+        printf("Did not find 30\n");
+    } else {
+        printf("Found 30\n");
+    }
+
+    list_add(&mylist, 40);
+    list_dump(&mylist);
+    return 0;
 }
