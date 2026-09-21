@@ -34,20 +34,22 @@ my_list->tail = new_node;
 
 void list_add(struct list *lst, int value) {
     lnode  new_node = {.value = value, .next = NULL};
-    lnode *ptr_node = (lnode *)calloc(1, sizeof(lnode));
+    lnode *ptr_node = (lnode *)malloc(1 * sizeof(lnode));
     *ptr_node       = new_node;
     if (lst->head == NULL) {
         lst->head = ptr_node;
         lst->tail = ptr_node;
     } else {
-        lst->head->next = ptr_node;
+        lst->tail->next = ptr_node;
         lst->tail       = ptr_node;
     }
 }
 
 struct lnode *list_find(struct list *lst, int value) {
-    for (lnode *node = lst->head; node->next != NULL; node = node->next) {
-        printf("VALUE %d\n", node->value);
+    for (lnode *node = lst->head; node != NULL; node = node->next) {
+        if (node->value == value) {
+            return node;
+        }
     }
     return NULL;
 }
