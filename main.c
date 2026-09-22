@@ -4,8 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define GERO "GEROOOO"
+#define ELIZABETH "GERO"
 
 int main(int argc, char **argv) {
-    printf("%ld\n", __STDC_VERSION__);
+    int res = strcmp(GERO, ELIZABETH);
+    printf("RES = %d\n", res);
     return 0;
 }
