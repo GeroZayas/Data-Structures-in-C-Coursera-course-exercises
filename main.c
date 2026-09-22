@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define GERO "GEROOOO"
-#define ELIZABETH "GERO"
+#define GERO "GERO"
+#define ELIZABETH "ELIZABETH"
 
 int main(int argc, char **argv) {
     int res = strcmp(GERO, ELIZABETH);
