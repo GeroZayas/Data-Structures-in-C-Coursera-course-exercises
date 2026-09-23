@@ -1,0 +1,8 @@
+[
+  {
+    "label": "Debug Main",
+    "program": "$ZED_WORKTREE_ROOT/main",
+    "request": "launch",
+    "adapter": "CodeLLDB"
+  }
+]
