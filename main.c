@@ -43,19 +43,27 @@ struct lnode *list_find(struct list *lst, int value) {
 }
 
 void list_remove(struct list *lst, int value) {
-    /* Remove the value from the linked list. */
-    // traverse the linked listchecking for values, if value found
-    // change the ->next from prev node to the -> next of node with value
-    // struct lnode *temp; 
-    for (lnode *cur = lst->head; cur->next != NULL; cur = cur->next){
-        // temp = cur;
-        if(cur->value == value){
+    for (lnode *cur = lst->head; cur->next != NULL; cur = cur->next) {
+        if (cur->value == value) {
             printf("list_remove => VALUE FOUND %d\n", cur->value);
-        } else if(cur->next->value == value){
-            printf("hey %d\n", cur->value);
+            lst->head = cur->next;
+            break;
+        } else if (cur->next->value == value) {
+            printf("list_remove => VALUE FOUND %d\n", cur->next->value);
+            if (cur->next->next == NULL) { // we found TAIL
+                cur->next = NULL;
+                lst->tail = cur;
+                break;
+            } else {
+                cur->next = cur->next->next;
+                break;
+            }
+        } else {
+            continue;
         }
     }
 }
+
 
 void list_dump(struct list *lst) {
     printf("\nDump:\n");
@@ -65,7 +73,7 @@ void list_dump(struct list *lst) {
 }
 
 int main(int argc, char **argv) {
-    struct list   mylist;
+    struct list mylist;
     // struct lnode *mynode;
 
     mylist.head = NULL;
