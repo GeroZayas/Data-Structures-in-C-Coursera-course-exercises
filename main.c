@@ -1,79 +1,90 @@
 #include "stuff.h"
-#include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#define NAME "Gero"
+/*
+You will extend the previous assignment with list_add() and list_find() and add a function called list_delete() that
+will find and remove the node containing the integer value if it is in the list.
 
-void print_with_arrows(char *text) {
-  for (int i = 0; i < strlen(text); i++) {
-    if (text[i] != text[strlen(text) - 1]) {
-      printf("%c->", text[i]);
+*/
+
+typedef struct lnode {
+    int           value;
+    struct lnode *next;
+} lnode;
+
+typedef struct list {
+    lnode *head;
+    lnode *tail;
+} list;
+
+void list_add(struct list *lst, int value) {
+    lnode  new_node = {.value = value, .next = NULL};
+    lnode *ptr_node = (lnode *)malloc(1 * sizeof(lnode));
+    *ptr_node       = new_node;
+    if (lst->head == NULL) {
+        lst->head = ptr_node;
+        lst->tail = ptr_node;
     } else {
-      printf("%c", text[i]);
+        lst->tail->next = ptr_node;
+        lst->tail       = ptr_node;
     }
-  }
-  printf("\n");
 }
 
-void print_reverse_string(char *text, bool arrows) {
-  int len_of_text = strlen(text);
-  // printf("The len of the string is %d\n", len_of_text);
-
-  if (arrows) {
-    printf("Arrows true\n");
-    for (int i = len_of_text; i >= 0; i--) {
-      if (i != 0 && i != len_of_text) {
-        printf("%c->", text[i]);
-      } else {
-        printf("%c\n", text[i]);
-      }
+struct lnode *list_find(struct list *lst, int value) {
+    for (lnode *node = lst->head; node != NULL; node = node->next) {
+        if (node->value == value) {
+            return node;
+        }
     }
+    return NULL;
+}
 
-  } else {
-    for (int i = len_of_text; i >= 0; i--) {
-      printf("%c", text[i]);
+void list_remove(struct list *lst, int value) {
+    /* Remove the value from the linked list. */
+    // traverse the linked listchecking for values, if value found
+    // change the ->next from prev node to the -> next of node with value
+    // struct lnode *temp; 
+    for (lnode *cur = lst->head; cur->next != NULL; cur = cur->next){
+        // temp = cur;
+        if(cur->value == value){
+            printf("list_remove => VALUE FOUND %d\n", cur->value);
+        } else if(cur->next->value == value){
+            printf("hey %d\n", cur->value);
+        }
     }
-    printf("\n");
-  }
 }
 
-const char *get_user_input(void) {
-  static char user_input[100];
-  printf("INSERT SOMETHING HERE:\n");
-  fgets(user_input, sizeof(user_input), stdin);
-  return user_input;
+void list_dump(struct list *lst) {
+    printf("\nDump:\n");
+    for (lnode *cur = lst->head; cur != NULL; cur = cur->next) {
+        printf("  %d\n", cur->value);
+    }
 }
 
-int main(void) {
-  print_with_arrows(NAME);
-  print_reverse_string(NAME, 1);
-  const char *res = get_user_input();
-  printf("%s\n", res);
+int main(int argc, char **argv) {
+    struct list   mylist;
+    // struct lnode *mynode;
 
-  float farray[3];
-  memset(farray, 1, sizeof(farray));
-  printf("%f\n", farray[0]);
-  printf("%f\n", farray[1]);
-  printf("%f\n", farray[2]);
+    mylist.head = NULL;
+    mylist.tail = NULL;
 
-  puts("Something Else Here");
-  puts("Some new line here");
+    list_add(&mylist, 10);
+    list_add(&mylist, 20);
+    list_add(&mylist, 30);
+    list_dump(&mylist);
 
-  char new_name[20];
-  puts("Insert name here:");
-  scanf("%5s", new_name);
-  puts("This is the new name:");
-  puts(new_name);
+    list_remove(&mylist, 42); // <------------
 
+    list_remove(&mylist, 10); // <------------
+    list_dump(&mylist);
+
+    list_remove(&mylist, 30); // <------------
+    list_dump(&mylist);
+
+    list_add(&mylist, 40);
+    list_dump(&mylist);
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
